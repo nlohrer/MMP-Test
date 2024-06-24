@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class PlayerProjectile : Projectile
 {
+    private Vector2 Direction;
+
     public override void Start()
     {
-        Damage = 1;
-        Speed = 11f;
         base.Start();
-
         var player = GameObject.FindGameObjectWithTag("Player");
         var camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        Vector2 direction = camera.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
-        Rb.velocity = direction.normalized * Speed;
+        Direction = camera.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
+        Rb.velocity = Direction.normalized * Speed;
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
@@ -29,4 +28,9 @@ public class PlayerProjectile : Projectile
         }
 
     }
+
+    //private void FixedUpdate()
+    //{
+    //    Rb.AddForce(Direction.normalized * 1.3f, ForceMode2D.Impulse);
+    //}
 }

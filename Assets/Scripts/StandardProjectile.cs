@@ -5,8 +5,6 @@ public class StandardProjectile : Projectile
 
     public override void Start()
     {
-        Damage = 1;
-        Speed = 5f;
         base.Start();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");

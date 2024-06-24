@@ -5,15 +5,18 @@ public abstract class Enemy: MonoBehaviour
     public int HP;
     public float Speed;
     public float AttackCooldown;
-    public Vector2 Movement = new(1f, 1f);
+    public float AttackRange;
+    public Vector2 Movement;
 
     protected float TimeSinceLastAttack;
     protected Rigidbody2D Rb;
+    protected Player Player;
 
     public virtual void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
         Rb.velocity = Movement * Speed;
+        Player = FindFirstObjectByType<Player>();
     }
 
     public virtual void Update()
@@ -27,6 +30,7 @@ public abstract class Enemy: MonoBehaviour
         HP -= damage;
         if (HP <= 0)
         {
+            GameManager.EnemiesKilled++;
             Destroy(gameObject);
         }
     }
@@ -38,6 +42,7 @@ public abstract class Enemy: MonoBehaviour
             Player player = other.collider.GetComponent<Player>();
             Destroy(gameObject);
             player.GetHit(1);
+            return;
         }
         Movement = Vector2.Reflect(Movement, other.GetContact(0).normal);
         Rb.velocity = Movement * Speed;
@@ -45,7 +50,7 @@ public abstract class Enemy: MonoBehaviour
 
     protected virtual void AttemptAttack()
     {
-        if (true) // Range check
+        if (Vector2.Distance(Player.GetComponent<Rigidbody2D>().position, Rb.position) < AttackRange) // Range check
         {
             if (TimeSinceLastAttack >= AttackCooldown)
             {

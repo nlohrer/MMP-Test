@@ -1,16 +1,23 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public float Speed = 12f;
-    public int HP = 10;
+    public float Speed = 8f;
+    public int HP = 3;
+    public float AttackCooldown = 1f;
+    public float InvulOnHitDuration = 0.5f;
     public Vector2 movement;
     public GameObject Projectile;
+    public GameObject Gun;
+    public bool InvulMode = false;
 
     private Rigidbody2D Rb2d;
     private SpriteRenderer Renderer;
     private static float InverseSqrt = 1f / Mathf.Sqrt(2f);
+    private float LastTimeGotHit = 0f;
+    private float LastAttackTime = -1f;
 
     void Start()
     {
@@ -24,11 +31,22 @@ public class Player : MonoBehaviour
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (horizontalInput == 1)
+        {
+            Renderer.flipX = true;
+
+        }
+        else if (horizontalInput == -1)
+        {
+            Renderer.flipX = false;
+        }
         if (horizontalInput != 0 && verticalInput != 0)
         {
             horizontalInput *= InverseSqrt;
             verticalInput *= InverseSqrt;
         }
+
         movement = new Vector2(horizontalInput, verticalInput);
 
         if (Input.GetMouseButtonDown(0))
@@ -39,13 +57,26 @@ public class Player : MonoBehaviour
 
     private void Shoot(Vector2 target)
     {
-        var projectile = Instantiate(Projectile, Rb2d.position, Quaternion.identity);
+        if (Time.time - LastAttackTime >= AttackCooldown)
+        {
+            var gunDistanceVector = (Vector2)Gun.transform.position - Rb2d.position;
+            var projectile = Instantiate(Projectile, Rb2d.position + gunDistanceVector * 1.8f, Quaternion.identity);
+            LastAttackTime = Time.time;
+        }
     }
 
     public void GetHit(int damage)
     {
+        if (Time.time - LastTimeGotHit < InvulOnHitDuration || InvulMode)
+        {
+            return;
+        }
+
+
         // Trigger hit animation
         HP -= damage;
+        var uiManager = FindFirstObjectByType<UIManager>();
+        uiManager.RemoveHeart(HP);
         if (HP <= 0)
         {
             StartCoroutine(GameOver());
@@ -54,21 +85,24 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(HitAnimation());
         }
+        LastTimeGotHit = Time.time;
     }
 
     private IEnumerator GameOver()
     {
         movement = Vector2.zero;
+        Renderer.color = Color.red;
         // death animation
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(2);
         // GameOverScreen
     }
 
     private IEnumerator HitAnimation()
     {
         Renderer.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        Renderer.color = Color.black;
+        yield return new WaitForSeconds(InvulOnHitDuration);
+        Renderer.color = Color.white;
     }
 
     private void FixedUpdate()
