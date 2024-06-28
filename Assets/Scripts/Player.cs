@@ -12,12 +12,13 @@ public class Player : MonoBehaviour
     public GameObject Projectile;
     public GameObject Gun;
     public bool InvulMode = false;
+    public Ability[] Abilities;
+    public bool CanMoveManually = true;
 
     private Rigidbody2D Rb2d;
     private SpriteRenderer Renderer;
-    private static float InverseSqrt = 1f / Mathf.Sqrt(2f);
+    private static readonly float InverseSqrt = 1f / Mathf.Sqrt(2f);
     private float LastTimeGotHit = 0f;
-    private float LastAttackTime = -1f;
 
     void Start()
     {
@@ -29,6 +30,27 @@ public class Player : MonoBehaviour
     {
         if (HP <= 0) return;
 
+        if (CanMoveManually)
+        {
+            SetMovement(); 
+        }
+
+        foreach (var ability in Abilities)
+        {
+            if (ability.CanUse())
+            {
+                ability.SetReady(true);
+                if (ability.CheckForCommand())
+                {
+                    ability.Use();
+                }
+            }
+
+        }
+    }
+
+    private void SetMovement()
+    {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -47,24 +69,9 @@ public class Player : MonoBehaviour
             verticalInput *= InverseSqrt;
         }
 
+
         movement = new Vector2(horizontalInput, verticalInput);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Shoot(Input.mousePosition);
-        }
     }
-
-    private void Shoot(Vector2 target)
-    {
-        if (Time.time - LastAttackTime >= AttackCooldown)
-        {
-            var gunDistanceVector = (Vector2)Gun.transform.position - Rb2d.position;
-            var projectile = Instantiate(Projectile, Rb2d.position + gunDistanceVector * 1.8f, Quaternion.identity);
-            LastAttackTime = Time.time;
-        }
-    }
-
     public void GetHit(int damage)
     {
         if (Time.time - LastTimeGotHit < InvulOnHitDuration || InvulMode)

@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Enemy
   - Background
+  - Gun
   layers:
   - Default
   - TransparentFX
@@ -55,4 +56,7 @@ TagManager:
     locked: 0
   - name: Units
     uniqueID: 2177524919
+    locked: 0
+  - name: Effects
+    uniqueID: 4194201883
     locked: 0

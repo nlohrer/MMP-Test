@@ -7,17 +7,18 @@ public class PlayerProjectile : Projectile
     public override void Start()
     {
         base.Start();
-        var player = GameObject.FindGameObjectWithTag("Player");
-        var camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        Direction = camera.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
-        Rb.velocity = Direction.normalized * Speed;
+        //var player = GameObject.FindGameObjectWithTag("Player");
+        //var camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //Direction = camera.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
+        //float angle = Vector2.SignedAngle(Vector2.left, Direction);
+        //Rb.rotation = angle;
+        Rb.velocity = Movement * Speed;
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<Enemy>() != null)
         {
-            // hit Enemy
             var enemy = other.GetComponent<Enemy>();
             enemy.GetHit(Damage);
             Destroy(gameObject);
