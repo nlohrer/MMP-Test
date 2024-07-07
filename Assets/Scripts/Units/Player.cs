@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public GameObject Gun;
     public bool InvulMode = false;
     public Ability[] Abilities;
+
+    public Shoot shoot;
     public bool CanMoveManually = true;
 
     private Rigidbody2D Rb2d;
@@ -104,6 +106,31 @@ public class Player : MonoBehaviour
             StartCoroutine(HitAnimation());
         }
         LastTimeGotHit = Time.time;
+    }
+
+    public void MakeInvul(float duration) {
+        StartCoroutine(Invulnerability(duration));
+    }
+    
+    public void MakeFire(float duration) {
+        StartCoroutine(FiringPower(duration));
+    }
+
+    private IEnumerator Invulnerability(float duration) {
+        this.InvulMode = true; 
+        Renderer.color = Color.yellow; // stern animation
+        yield return new WaitForSeconds(duration); 
+        Renderer.color = Color.white;
+        this.InvulMode = false; 
+    }
+
+    private IEnumerator FiringPower(float duration) {
+        float i = 0; 
+        while (i < duration) {
+            shoot.ShootExternal(); 
+            yield return new WaitForSeconds(0.2f);
+            i += 0.2f;
+        }
     }
 
     private IEnumerator GameOver()

@@ -8,6 +8,8 @@ public abstract class Enemy: MonoBehaviour
     public float AttackRange;
     public Vector2 Movement;
 
+    public GameManager gameManager; 
+
     protected float TimeSinceLastAttack;
     protected Rigidbody2D Rb;
     protected Player Player;

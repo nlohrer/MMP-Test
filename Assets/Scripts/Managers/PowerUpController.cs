@@ -51,4 +51,5 @@ public class PowerUpController : MonoBehaviour
             return position;
         }
     }
+    
 }

@@ -7,6 +7,8 @@ public abstract class PowerUp : MonoBehaviour
 
     private float CreationTime;
 
+    public PowerUpController powerUpController;
+
     public virtual void Start()
     {
         CreationTime = Time.time;

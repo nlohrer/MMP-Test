@@ -122,6 +122,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &147212279 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3927164519239517383, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
+  m_PrefabInstance: {fileID: 305212423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ffb8b764ffaa942a752dbf2298e0ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &156413139
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +213,22 @@ PrefabInstance:
       propertyPath: ShieldIcon
       value: 
       objectReference: {fileID: 1826992348}
+    - target: {fileID: 651959081965840644, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
+      propertyPath: shoot
+      value: 
+      objectReference: {fileID: 1563579319}
+    - target: {fileID: 651959081965840644, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
+      propertyPath: InvulMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 651959081965840644, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
+      propertyPath: Abilities.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 651959081965840644, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
+      propertyPath: Abilities.Array.data[3]
+      value: 
+      objectReference: {fileID: 147212279}
     - target: {fileID: 3008175725302683804, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1164,9 +1191,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2757aecba5e2e4e8dafa04a801a10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnInterval: 15
+  SpawnInterval: 10
   PowerUpTypes:
   - {fileID: 4172884250373004185, guid: acf47e28945628540abd1e761fcb45ea, type: 3}
+  - {fileID: 5050233862939568664, guid: 6ecde50718cdc49d1964f95ffa7df9a9, type: 3}
+  - {fileID: 9121254199205852379, guid: 74a4118a249184727bdfbf0c8d510ce7, type: 3}
   Background: {fileID: 570490703}
   MinDistanceFromPlayer: 2.5
 --- !u!1 &930924725
@@ -1576,6 +1605,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fill: 0
   Mask: {fileID: 1782838753}
+--- !u!114 &1563579319 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6119683299174778328, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
+  m_PrefabInstance: {fileID: 305212423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3dc34f2373e254db74e415969a531e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1694096375
 GameObject:
   m_ObjectHideFlags: 0

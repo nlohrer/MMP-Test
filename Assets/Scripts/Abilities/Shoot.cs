@@ -36,4 +36,8 @@ public class Shoot : Ability
         Projectile.Movement = direction.normalized;
         Instantiate(Projectile, playerPosition + gunDistanceVector * 1.8f, Quaternion.Euler(0, 0, angle));
     }
+
+    public void ShootExternal() {
+        InternalUse();
+    }
 }
