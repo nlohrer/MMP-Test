@@ -108,12 +108,17 @@ public class Player : MonoBehaviour
         LastTimeGotHit = Time.time;
     }
 
-    public void MakeInvul(float duration) {
-        StartCoroutine(Invulnerability(duration));
-    }
-    
-    public void MakeFire(float duration) {
-        StartCoroutine(FiringPower(duration));
+    public void MakePowerUp(float duration, int ability) // 0 == stern; 1 == MashineGun
+    {
+        switch (ability) 
+        {
+            case 0: 
+                StartCoroutine(Invulnerability(duration));
+                break;
+            case 1: 
+                StartCoroutine(FiringPower(duration));
+                break;
+        }
     }
 
     private IEnumerator Invulnerability(float duration) {

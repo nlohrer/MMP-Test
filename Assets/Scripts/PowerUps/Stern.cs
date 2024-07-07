@@ -7,8 +7,8 @@ public class Stern : PowerUp
     
       public override void Affect(Player player)
     {
-        player.MakeInvul(Duration);
-         
+        player.MakePowerUp(Duration, 0);
+
     }
 
 }

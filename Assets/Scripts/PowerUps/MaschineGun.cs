@@ -7,6 +7,6 @@ public class MaschineGun : PowerUp
 
     public override void Affect(Player player)
     {
-        player.MakeFire(Duration);         
+        player.MakePowerUp(Duration, 1);         
     }    
 }
