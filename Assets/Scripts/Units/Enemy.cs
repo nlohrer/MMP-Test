@@ -46,7 +46,11 @@ public abstract class Enemy: MonoBehaviour
         if (other.collider.GetComponent<Player>() is not null)
         {
             Player player = other.collider.GetComponent<Player>();
-            Destroy(gameObject);
+            if(player.InvulMode == true) 
+            {
+                GameManager.EnemiesKilled++;
+            }
+            Destroy(gameObject); // hier abändern, dass der rammbock net despawned
             player.GetHit(1);
             return;
         }

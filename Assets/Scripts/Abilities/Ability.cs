@@ -2,10 +2,10 @@ using UnityEngine;
 
 public abstract class Ability : MonoBehaviour
 {
-    public float Cooldown;
+    public float Cooldown; 
 
-    protected float TimeAbilityWasLastUsed = -1f;
-    protected Player Player;
+    protected float TimeAbilityWasLastUsed = -1f; // wann wurde die Ability zuletzt benutzt
+    protected Player Player; 
 
     public abstract bool CheckForCommand();
     public abstract void SetReady(bool ready);
@@ -16,7 +16,7 @@ public abstract class Ability : MonoBehaviour
         Player = FindFirstObjectByType<Player>();
     }
 
-    public void Use()
+    public virtual void Use()
     {
         if (CanUse())
         {

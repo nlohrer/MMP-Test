@@ -124,18 +124,24 @@ public class Player : MonoBehaviour
     private IEnumerator Invulnerability(float duration) {
         this.InvulMode = true; 
         Renderer.color = Color.yellow; // stern animation
+        shoot.CanShoot = false; 
+        Gun.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(duration); 
         Renderer.color = Color.white;
         this.InvulMode = false; 
+        shoot.CanShoot = true; 
+        Gun.gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     private IEnumerator FiringPower(float duration) {
         float i = 0; 
+        shoot.CanShoot = false;
         while (i < duration) {
             shoot.ShootExternal(); 
             yield return new WaitForSeconds(0.2f);
             i += 0.2f;
         }
+        shoot.CanShoot = true;
     }
 
     private IEnumerator GameOver()

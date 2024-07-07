@@ -4,6 +4,8 @@ public class Shoot : Ability
 {
     public Projectile Projectile;
 
+    public bool CanShoot = true;
+
     private GunFlipper Flipper;
     private GameObject Gun;
     private Camera Camera;
@@ -14,6 +16,19 @@ public class Shoot : Ability
         Gun = GameObject.FindGameObjectWithTag("Gun");
         Flipper = Gun.GetComponent<GunFlipper>();
         Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+    }
+
+    public override void Use()
+    {
+        if (CanUse())
+        {
+            if (CanShoot) 
+            {
+                InternalUse();
+                TimeAbilityWasLastUsed = Time.time;
+                SetReady(false);
+            }
+        }
     }
 
     public override bool CheckForCommand()
