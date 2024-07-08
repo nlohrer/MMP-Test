@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class GameOverScript : MonoBehaviour
 {
-    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI ScoreText; // text einfügen
 
-    void Start()
+    void Start() // beim scenen start den berechneten score als Text einfügen
     {
         ScoreText.text = $"Your score is:\n{GameManager.Score}";
     }

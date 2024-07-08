@@ -3,7 +3,7 @@ using UnityEngine;
 public class StandardProjectile : Projectile
 {
 
-    public override void Start()
+    public override void Start() // on spawn velocity festlegen 
     {
         base.Start();
 

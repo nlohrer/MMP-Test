@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class PowerUpController : MonoBehaviour
 {
-    public float SpawnInterval = 10f;
-    public List<PowerUp> PowerUpTypes;
-    public GameObject Background;
-    public float MinDistanceFromPlayer = 3f;
+    public float SpawnInterval = 10f; // wie oft powerups?
+    public List<PowerUp> PowerUpTypes; // welche powerups?
+    public GameObject Background; 
+    public float MinDistanceFromPlayer = 3f; // nicht auf player spawnen
 
-    private float TimeLastIncreased = 0f;
-    private float TimeLastSpawned = 0f;
+    private float TimeLastSpawned = 0f; // tracken von spawns
 
-    // Update is called once per frame
-    void Update()
+    void Update() // alle SpawnInterval sekunden powerup spawnen
     {
         if (Time.time - TimeLastSpawned >= SpawnInterval)
         {
@@ -21,18 +19,18 @@ public class PowerUpController : MonoBehaviour
         }
     }
 
-    private void SpawnRandomPowerUp()
+    private void SpawnRandomPowerUp() // random power up aus der liste spawnen
     {
-        int random = Random.Range(0, PowerUpTypes.Count);
+        int random = Random.Range(0, PowerUpTypes.Count); // random powerup auswählen
         var newPowerUp = PowerUpTypes[random];
 
-        Vector2 randomLocation;
+        Vector2 randomLocation; // random location berechnen
         randomLocation = GetRandomLocationWithMinimumDistanceToPlayer();
 
-        Instantiate(newPowerUp, randomLocation, Quaternion.identity);
+        Instantiate(newPowerUp, randomLocation, Quaternion.identity); // powerup spawnen
     }
 
-    private Vector2 GetRandomLocationWithMinimumDistanceToPlayer()
+    private Vector2 GetRandomLocationWithMinimumDistanceToPlayer() // solange position berechnen, bis 3 units vom player entfernt
     {
         float xSpawn = Background.transform.localScale.x / 2 - 1;     // half the horizontal length of the background
         float ySpawn = Background.transform.localScale.y / 2 - 1;     // half the vertical width of the background

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BounceModeEnemy: MonoBehaviour
+public class BounceModeEnemy: MonoBehaviour // nebenmodus ähnliche implementation
 {
     public int HP;
     public float Speed;

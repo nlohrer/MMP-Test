@@ -5,7 +5,7 @@ public class SniperEnemy : Enemy
 
     public GameObject Projectile;
 
-    public override void Update()
+    public override void Update() // sprite setzen, dass es in richtung spieler schaut
     {
         base.Update();
         if (Player.transform.position.x < transform.position.x)
@@ -17,13 +17,16 @@ public class SniperEnemy : Enemy
         }
     }
 
-    protected override void MakeAttack()
+    protected override void MakeAttack() // angriffs implementierung
     {
-        EnemyAnimator.SetTrigger("attack");
-        //EnemyAnimator.ResetTrigger("attack");
-        var FlightDuration = (Player.transform.position - gameObject.transform.position).magnitude / Projectile.GetComponent<SniperProjectile>().Speed; //estimated time from enemy to player
+        EnemyAnimator.SetTrigger("attack"); // attack animation starten
+        // berechnung der geschätzten zeit des Projectils vom enemy bis zum Spieler
+        var FlightDuration = (Player.transform.position - gameObject.transform.position).magnitude / Projectile.GetComponent<SniperProjectile>().Speed; 
+        // speichern der spieler richtung und geschwindigkeit
         var PlayerVelocity = Player.GetComponent<Rigidbody2D>().velocity;
-        var EstimatedLocation = Player.transform.position + (Vector3)PlayerVelocity * FlightDuration; // estimated position at arrival of bullet
+        // berechnung der geschätzten Position des spielers zur ankunftszeit
+        var EstimatedLocation = Player.transform.position + (Vector3)PlayerVelocity * FlightDuration;
+        //bullet spawnen
         SniperProjectile Bullet = Instantiate(Projectile, Rb.position, Quaternion.identity).GetComponent<SniperProjectile>();
         Bullet.Init(EstimatedLocation);
     }

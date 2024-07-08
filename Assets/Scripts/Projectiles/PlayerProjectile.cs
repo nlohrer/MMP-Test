@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class PlayerProjectile : Projectile
 {
-    private Vector2 Direction;
+    private Vector2 Direction; 
 
-    public override void Start()
+    public override void Start() // richtung und speed festlegen on spawn
     {
         base.Start();
         Rb.velocity = Movement * Speed;
     }
 
-    public override void OnTriggerEnter2D(Collider2D other)
+    public override void OnTriggerEnter2D(Collider2D other) // hit Funktion
     {
-        if (other.GetComponent<Enemy>() != null)
+        if (other.GetComponent<Enemy>() != null) // wenn gegner
         {
-            var enemy = other.GetComponent<Enemy>();
-            enemy.GetHit(Damage);
-            Destroy(gameObject);
+            var enemy = other.GetComponent<Enemy>(); 
+            enemy.GetHit(Damage); // enemy nimmt schaden
+            Destroy(gameObject); // projektil zerstören
         }
-        if (other.CompareTag("Wall"))
+        if (other.CompareTag("Wall")) // falls wall zerstören
         {
             Destroy(gameObject);
         }

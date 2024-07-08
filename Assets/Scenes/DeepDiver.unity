@@ -219,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 1563579319}
     - target: {fileID: 651959081965840644, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
       propertyPath: InvulMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 651959081965840644, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
       propertyPath: Abilities.Array.size
