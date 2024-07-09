@@ -7,8 +7,7 @@ public abstract class Enemy: MonoBehaviour
     public float AttackCooldown; // wie oft angreifen
     public float AttackRange; 
     public Vector2 Movement;
-
-    public GameManager gameManager; 
+    public GameObject DeathBubbles;
 
     protected float TimeSinceLastAttack; // tracking von angriffen
     protected Rigidbody2D Rb;
@@ -31,12 +30,13 @@ public abstract class Enemy: MonoBehaviour
         TimeSinceLastAttack += Time.deltaTime;
     }
 
-    public void GetHit(int damage) // schaden nehmen 
+    public virtual void GetHit(int damage) // schaden nehmen 
     {
         HP -= damage;
         if (HP <= 0)
         {
             GameManager.EnemiesKilled++;
+            Instantiate(DeathBubbles, Rb.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
@@ -50,6 +50,7 @@ public abstract class Enemy: MonoBehaviour
             {
                 GameManager.EnemiesKilled++;
             }
+            Instantiate(DeathBubbles, Rb.position, Quaternion.identity);
             Destroy(gameObject); // zerstöre enemie (überschrieben von enemies mit mehr HP als 1)
             player.GetHit(1); // spieler nimmt 1 schaden
             return;

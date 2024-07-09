@@ -53,6 +53,7 @@ MonoBehaviour:
   AttackCooldown: 4
   AttackRange: 100
   Movement: {x: 0.74314487, y: 0.66913056}
+  DeathBubbles: {fileID: 1386846102540976372, guid: 6e07605c71fd0aa4c897b3368ce526e6, type: 3}
   Projectile: {fileID: 5154145436092738870, guid: 321a9fc0f7d1fba4d96be775fd4f7407, type: 3}
 --- !u!50 &7464778842782818162
 Rigidbody2D:

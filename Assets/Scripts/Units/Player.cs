@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public GameObject Gun;
     public bool InvulMode = false;
     public Ability[] Abilities;
+    public GameObject[] InkList;
 
     public Shoot shoot;
     public bool CanMoveManually = true; // manuelles steuern des spielers
@@ -151,6 +152,20 @@ public class Player : MonoBehaviour
         // death animation
         yield return new WaitForSeconds(1f); // 1 sec warten
         SceneManager.LoadScene(2); // GameOverScreen 
+    }
+
+    public void SpawnInk()
+    {
+        StartCoroutine(Ink());
+    }
+
+    private IEnumerator Ink()
+    {
+        int random = Random.Range(0, InkList.Length - 1);
+        var ink = InkList[random];
+        ink.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        ink.SetActive(false);
     }
 
     private IEnumerator HitAnimation() //wenn spieler gehitet wird während InvulOnHitDuration rot setzen für clarity
