@@ -12,4 +12,5 @@ public class ProgressBar : MonoBehaviour // pur die progress bar für abilities
     {
         Mask.fillAmount = Fill;
     }
+    
 }
