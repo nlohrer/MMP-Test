@@ -219,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 1563579319}
     - target: {fileID: 651959081965840644, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
       propertyPath: InvulMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 651959081965840644, guid: 7f171930b656ea54c847a66272d3df0a, type: 3}
       propertyPath: InkList.Array.size
