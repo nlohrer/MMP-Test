@@ -51,6 +51,8 @@ MonoBehaviour:
   Damage: 1
   Speed: 14
   Movement: {x: 0, y: 0}
+  Volume: 0.2
+  OnShootAudio: {fileID: 8300000, guid: 764905f81c46ec741b059a90e49c93af, type: 3}
 --- !u!212 &-7337649166982910346
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.19, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -184,8 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 3
-  Speed: 3
+  Speed: 5
   AttackCooldown: 4.5
   AttackRange: 5
-  Movement: {x: -0.30901697, y: -0.95105654}
+  Movement: {x: 0.5299193, y: -0.84804803}
   DeathBubbles: {fileID: 1386846102540976372, guid: 6e07605c71fd0aa4c897b3368ce526e6, type: 3}
+  DashAudio: {fileID: 8300000, guid: 30dffc67668f35941950df7188dc6c8d, type: 3}

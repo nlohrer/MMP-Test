@@ -3,7 +3,6 @@ using UnityEngine;
 public class Shoot : Ability
 {
     public Projectile Projectile;
-
     public bool CanShoot = true; // on of wichtig für abilities
 
     private GunFlipper Flipper; 
@@ -49,6 +48,7 @@ public class Shoot : Ability
         Vector2 direction = Camera.ScreenToWorldPoint(Input.mousePosition) - Player.transform.position; // richtung bestimmen anhand mauszeiger
         float angle = Vector2.SignedAngle(Vector2.left, direction); // schussrichtung setzen
         Projectile.Movement = direction.normalized; // movement setzen
+
         Instantiate(Projectile, playerPosition + gunDistanceVector * 1.8f, Quaternion.Euler(0, 0, angle)); // projectile mit richtung erstellen
     }
 

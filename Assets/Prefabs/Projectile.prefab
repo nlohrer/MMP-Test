@@ -164,3 +164,5 @@ MonoBehaviour:
   Damage: 1
   Speed: 10
   Movement: {x: 0, y: 0}
+  Volume: 0.5
+  OnShootAudio: {fileID: 8300000, guid: 938659fdcbe6fa642b800bebe5168014, type: 3}

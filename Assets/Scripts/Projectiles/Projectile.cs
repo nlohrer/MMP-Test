@@ -6,6 +6,9 @@ public abstract class Projectile : MonoBehaviour
     public float Speed; // geschwindigkeit des Projectils
     public Vector2 Movement = new(1f, 1f); // wird überschrieben
 
+    public float Volume = 0.5f;
+    public AudioClip OnShootAudio;
+
     protected float CreationTime; // wann wurde es gespawned
     protected Rigidbody2D Rb; // rigidbody für movement
 
@@ -13,6 +16,7 @@ public abstract class Projectile : MonoBehaviour
     {
         Rb = GetComponent<Rigidbody2D>();
         CreationTime = Time.time;
+        SoundManager.Instance.PlayClip(OnShootAudio, transform, Volume);
     }
 
     public virtual void OnTriggerEnter2D(Collider2D other) 

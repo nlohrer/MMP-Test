@@ -160,7 +160,7 @@ Animator:
   m_GameObject: {fileID: 993112486440839502}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d2711b3c1b4b8673599ed9a00bf9c2dd, type: 2}
+  m_Controller: {fileID: 9100000, guid: c7cac8cc99b4fbe42999969fb62c84d4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -183,6 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c886ba9ad537402bc33e9de41cfa1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
+  Damage: 0
   Speed: 3.5
   Movement: {x: 1, y: 1}
+  Volume: 0.2
+  OnShootAudio: {fileID: 8300000, guid: 0fe14783eb17ae144b9f4295524b5251, type: 3}

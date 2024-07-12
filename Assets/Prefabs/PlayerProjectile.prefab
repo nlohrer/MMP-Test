@@ -128,7 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 1
   Speed: 12
-  Movement: {x: 0.74618024, y: 0.665744}
+  Movement: {x: 0.9636949, y: 0.267006}
+  Volume: 0.2
+  OnShootAudio: {fileID: 8300000, guid: 1d8a23c252e0da442b80e0bc5be901ab, type: 3}
 --- !u!70 &-5586634993320290022
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

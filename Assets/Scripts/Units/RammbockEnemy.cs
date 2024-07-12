@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class RammbockEnemy : Enemy
 {
+    public AudioClip DashAudio;
+
+    private AudioSource DashAudioSource;
+
     public override void Update()
     {
         base.Update();
@@ -13,11 +17,11 @@ public class RammbockEnemy : Enemy
             Rb.velocity = Movement * Speed;
             if (Player.transform.position.x < transform.position.x)
             {
-                Renderer.flipX = true;
+                Renderer.flipX = false;
             }
             else
             {
-                Renderer.flipX = false;
+                Renderer.flipX = true;
             }
         }
         if (StateInfo.IsName("Kugelfisch_Aufblasen"))
@@ -59,8 +63,13 @@ public class RammbockEnemy : Enemy
         if (other.collider.GetComponent<Player>() is not null)
         {
             Player player = other.collider.GetComponent<Player>();
-            GetHit(1);
-            player.GetHit(1);
+            if (player.InvulMode)
+            {
+                GetHit(HP);
+            } else
+            {
+                player.GetHit(1);
+            }
         }
         Movement = Vector2.Reflect(Movement, other.GetContact(0).normal);
         Rb.velocity = Movement * Speed;
@@ -92,9 +101,12 @@ public class RammbockEnemy : Enemy
     private IEnumerator BoostEnemySpeed()
     {
         yield return new WaitForSeconds(1.15f);
+        DashAudioSource = SoundManager.Instance.PlayLoopingClip(DashAudio, transform, 2.5f);
         Movement = (Vector2)(Player.transform.position - gameObject.transform.position).normalized;
         yield return new WaitForSeconds(3f);
         EnemyAnimator.SetTrigger("AbblasenStarten");
+        yield return new WaitForSeconds(1f);
+        Destroy(DashAudioSource.gameObject);
     }
 }
 

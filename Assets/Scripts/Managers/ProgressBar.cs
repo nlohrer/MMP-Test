@@ -10,7 +10,7 @@ public class ProgressBar : MonoBehaviour // pur die progress bar für abilities
     // Update is called once per frame
     void Update()
     {
-        Mask.fillAmount = Fill;
+        Mask.fillAmount = 1 - Fill;
     }
     
 }

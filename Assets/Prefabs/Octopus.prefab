@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.03, y: 1.76, z: -3.599134}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -197,6 +197,6 @@ MonoBehaviour:
   Speed: 5
   AttackCooldown: 3
   AttackRange: 4
-  Movement: {x: 0.104528464, y: 0.9945219}
+  Movement: {x: 0.9612617, y: 0.2756374}
   DeathBubbles: {fileID: 1386846102540976372, guid: 6e07605c71fd0aa4c897b3368ce526e6, type: 3}
   Projectile: {fileID: 993112486440839502, guid: 9f0401bc53dde53f1b989848bc6a1b21, type: 3}
