@@ -5,9 +5,10 @@ public class PowerUpController : MonoBehaviour
 {
     public float SpawnInterval = 10f; // wie oft powerups?
     public List<PowerUp> PowerUpTypes; // welche powerups?
-    public GameObject Background; 
+    public GameObject Background;
     public float MinDistanceFromPlayer = 3f; // nicht auf player spawnen
 
+    private float TimeLastIncreased = 0f; // tracker für spawnrate reduzierung
     private float TimeLastSpawned = 0f; // tracken von spawns
 
     void Update() // alle SpawnInterval sekunden powerup spawnen
@@ -17,6 +18,12 @@ public class PowerUpController : MonoBehaviour
             SpawnRandomPowerUp();
             TimeLastSpawned = Time.time;
         }
+        if (SpawnInterval >= 8f && Time.time - TimeLastIncreased >= 30f)
+        {
+            SpawnInterval -= 0.5f;
+            TimeLastIncreased = Time.time;
+        }
+
     }
 
     private void SpawnRandomPowerUp() // random power up aus der liste spawnen
@@ -49,5 +56,5 @@ public class PowerUpController : MonoBehaviour
             return position;
         }
     }
-    
+
 }

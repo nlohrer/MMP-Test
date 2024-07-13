@@ -15,7 +15,7 @@ public class RammbockEnemy : Enemy
         if (StateInfo.IsName("Kugelfisch_Idle") || StateInfo.IsName("Kugelfisch_Abblasen"))
         {
             Rb.velocity = Movement * Speed;
-            if (Player.transform.position.x < transform.position.x)
+            if (Movement.x > transform.position.x)
             {
                 Renderer.flipX = false;
             }
@@ -89,7 +89,6 @@ public class RammbockEnemy : Enemy
             StartCoroutine(RenderRed());
         }
     }
-
 
     private IEnumerator RenderRed()
     {

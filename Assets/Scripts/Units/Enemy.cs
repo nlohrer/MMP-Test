@@ -9,7 +9,7 @@ public abstract class Enemy: MonoBehaviour
     public Vector2 Movement;
     public GameObject DeathBubbles;
 
-    protected float TimeSinceLastAttack; // tracking von angriffen
+    protected float TimeSinceLastAttack = 0; // tracking von angriffen
     protected Rigidbody2D Rb;
     protected Player Player;
     protected Animator EnemyAnimator;

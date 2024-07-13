@@ -48,6 +48,9 @@ public class Shield : Ability
         ShieldCircle.SetActive(true); // schild sichtbar machen
         yield return new WaitForSeconds(0.75f); // schild dauer abwarten
         ShieldCircle.SetActive(false); // schild unsichtbar machen
-        Player.InvulMode = false; // player schaden wieder anmachen
+        if (Player.ActiveStars <= 0)
+        {
+            Player.InvulMode = false; // player schaden wieder anmachen
+        }
     }
 }

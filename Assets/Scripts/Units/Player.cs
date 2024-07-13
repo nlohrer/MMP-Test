@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     public AudioClip HitAudio;
     public AudioClip StarPowerupAudio;
     public AudioClip StarPowerDownAudio;
+    public int ActiveStars = 0;
+    public GameObject PauseOverlay;
 
     public Shoot shoot;
     public bool CanMoveManually = true; // manuelles steuern des spielers
@@ -29,8 +32,9 @@ public class Player : MonoBehaviour
     private UIManager UIManager;
     private bool GunEnabled = true;
     private bool InFiringMode = false;
-    private int ActiveStars = 0;
     private float OriginalSpeed;
+    private bool Paused = false;
+    private GunRotation GunRotation;
 
     void Start()
     {
@@ -38,11 +42,18 @@ public class Player : MonoBehaviour
         Renderer = GetComponent<SpriteRenderer>();
         UIManager = FindFirstObjectByType<UIManager>();
         OriginalSpeed = Speed;
+        GunRotation = GetComponentInChildren<GunRotation>();
     }
 
     void Update() // player check
     {
         if (HP <= 0) return; // bei tod des spielers return
+
+        CheckForPause();
+        if (Paused)
+        {
+            return;
+        }
 
         if (CanMoveManually) // movement setzen wenn es gewollt ist
         {
@@ -64,6 +75,20 @@ public class Player : MonoBehaviour
                 }
             }
 
+        }
+    }
+
+    private void CheckForPause()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (Paused)
+            {
+                Unpause();
+            } else
+            {
+                Pause();
+            }
         }
     }
 
@@ -169,7 +194,8 @@ public class Player : MonoBehaviour
                 InvulMode = false;  // unsterblichkeit ausmachen
                 shoot.CanShoot = true;  // schießen wieder anmachen
                 Gun.gameObject.GetComponent<SpriteRenderer>().enabled = true; // gun sprite wieder an machen 
-            } else
+            }
+            else
             {
                 Renderer.color = Color.yellow;
             }
@@ -194,13 +220,26 @@ public class Player : MonoBehaviour
         InFiringMode = false;
     }
 
-    private IEnumerator GameOver() // gameover implementation
+    public void Pause()
     {
-        movement = Vector2.zero; // geschwindigkeit 0 setzen
-        Renderer.color = Color.red; // spieler auf rot setzen
-        // death animation
-        yield return new WaitForSeconds(1f); // 1 sec warten
-        SceneManager.LoadScene(2); // GameOverScreen 
+        Time.timeScale = 0f;
+        GunRotation.enabled = false;
+        Paused = true;
+        PauseOverlay.SetActive(Paused);
+    }
+
+    public void Unpause()
+    {
+        Time.timeScale = 1f;
+        GunRotation.enabled = true;
+        Paused = false;
+        PauseOverlay.SetActive(Paused);
+    }
+
+    public void UnpauseAndBackToMainMenu()
+    {
+        Unpause();
+        SceneManager.LoadScene(0);
     }
 
     public void SpawnInk()
@@ -213,8 +252,31 @@ public class Player : MonoBehaviour
         int random = Random.Range(0, InkList.Length - 1);
         var ink = InkList[random];
         ink.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.9f);
+        var inkImage = ink.GetComponent<Image>();
+        StartCoroutine(FadeAway(inkImage));
+        yield return new WaitForSeconds(0.2f);
+        inkImage.color = Color.white;
         ink.SetActive(false);
+    }
+
+    private IEnumerator FadeAway(Image image)
+    {
+        for (float i = 1; i >= 0; i -= Time.deltaTime * 5)
+        {
+            image.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+    }
+
+
+    private IEnumerator GameOver() // gameover implementation
+    {
+        movement = Vector2.zero; // geschwindigkeit 0 setzen
+        Renderer.color = Color.red; // spieler auf rot setzen
+        // death animation
+        yield return new WaitForSeconds(1f); // 1 sec warten
+        SceneManager.LoadScene(2); // GameOverScreen 
     }
 
     private IEnumerator HitAnimation() //wenn spieler gehitet wird während InvulOnHitDuration rot setzen für clarity

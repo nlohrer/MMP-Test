@@ -1,12 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public class InkProjectile : Projectile
 {
+    private SpriteRenderer Renderer;
+    private bool Fading = false;
 
     public override void Start()
     {
         base.Start();
 
+        Renderer = GetComponent<SpriteRenderer>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector2 direction = player.transform.position - transform.position;
         Rb.velocity = direction.normalized * Speed;
@@ -14,9 +18,23 @@ public class InkProjectile : Projectile
 
     private void Update()
     {
+        if (!Fading && Time.time - CreationTime >= 1.8)
+        {
+            StartCoroutine(FadeAway());
+            Fading = true;
+        }
         if (Time.time - CreationTime >= 2)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator FadeAway()
+    {
+        for (float i = 1; i >= 0; i -= Time.deltaTime * 5)
+        {
+            Renderer.color = new Color(1, 1, 1, i);
+            yield return null;
         }
     }
 

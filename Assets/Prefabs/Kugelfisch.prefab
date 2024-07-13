@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f40368af5925d4684f61f5e9e6097f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 3
+  HP: 2
   Speed: 5
   AttackCooldown: 4.5
   AttackRange: 5

@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOverScreen.unity
     guid: e12e0fefd2e3b5a4da1cc603dee024a5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BounceMode.unity
     guid: 86795bab2f2612c4f975587232bbe45b
   m_configObjects: {}

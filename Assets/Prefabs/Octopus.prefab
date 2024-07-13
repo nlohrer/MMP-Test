@@ -196,7 +196,7 @@ MonoBehaviour:
   HP: 1
   Speed: 5
   AttackCooldown: 3
-  AttackRange: 4
-  Movement: {x: 0.9612617, y: 0.2756374}
+  AttackRange: 5
+  Movement: {x: 0.06975647, y: 0.9975641}
   DeathBubbles: {fileID: 1386846102540976372, guid: 6e07605c71fd0aa4c897b3368ce526e6, type: 3}
   Projectile: {fileID: 993112486440839502, guid: 9f0401bc53dde53f1b989848bc6a1b21, type: 3}

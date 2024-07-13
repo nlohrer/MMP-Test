@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
             SpawnRandomEnemy();
             TimeLastSpawned = Time.time;
         }
-        if (SpawnInterval >= 1f && Time.time - TimeLastIncreased >= 20f)
+        if (SpawnInterval >= 2f && Time.time - TimeLastIncreased >= 20f)
         {
             SpawnInterval -= 0.5f;
             TimeLastIncreased = Time.time;
